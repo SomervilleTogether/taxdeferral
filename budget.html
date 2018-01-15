@@ -100,7 +100,7 @@
         for (var i = 0; i < budget.length; i++) {
           var budgetYear = budget[i];
           var row = $('<tr>');
-          row.append($('<th scope="row">').text(budgetYeafr.year+2018));
+          row.append($('<th scope="row">').text(budgetYear.year+2018));
           row.append($('<td>').text(budgetYear.homeValue.toLocaleString('en-us', c)));
           row.append($('<td>').text(budgetYear.taxesDeferred.toLocaleString('en-us', c)));
           row.append($('<td>').text(budgetYear.interest.toLocaleString('en-us', c)));
