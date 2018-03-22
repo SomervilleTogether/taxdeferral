@@ -12,18 +12,22 @@
       .yesno .btn-secondary:not([disabled]):not(.disabled).active.no {
       background-color: #bf0000;
       }
+	  .tooltip-inner {
+	     max-width: 50vw;
+	   }
     </style>
   </head>
   <body>
     <main role="main">
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Somerville 2018 Senior Property Tax Deferral (Due April 2<sup>nd</sup>):</h1>
+          <h1 class="display-3">Somerville 2018 Senior Property Tax Deferral:</h1>
+		  <h3> (Due April 2<sup>nd</sup>)</h3>
           <p>If you are a <b>homeowner, age 65 and older</b> whose yearly income is <b>less than $57,000</b>, 
             there is a program which may allow you to <b>defer payment of your property taxes</b> with a 
             3% interest rate until you sell your home or pass away.  This deferral would place a lien on your 
             property and requires payment of the deferred taxes and accrued interest upon sale of your home or at your passing.
-            Take a look at <a href="budget.html">this tool</a> to see how it will impact the value of your asset over time. 
+            Take a look at <a href="#budgetingTool">this tool</a> to see how it will impact the value of your asset over time. 
             There are other exemptions as well, and you can find them <a href="https://www.somervillema.gov/departments/finance/assessing/statutory-exemptions">here</a>. 
             Take this quick assessment below to see if you might qualify and contact the Assessing Office to learn more. 
             617-625-6600 ext. 3100
@@ -55,6 +59,13 @@
               <label class="btn btn-secondary no"><input type="radio" name="q2" value="no" autocomplete="off">No</label>
             </div>
           </div>
+		  <div class="form-group row yesno">
+            <label for="q0" class="col-sm-5 col-form-label text-sm-right">Is there a <b>mortgage on your home</b>?</label>	
+            <div class="col-sm-2 btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary yes"><input type="radio" name="qM" value="yes" autocomplete="off">Yes</label>
+              <label class="btn btn-secondary no"><input type="radio" name="qM" value="no" autocomplete="off">No</label>
+            </div>
+          </div>
           <div class="form-group row yesno">
             <label for="q3" class="col-sm-5 col-form-label text-sm-right">Have you lived in your home for <b>at least 5 years</b>?</label>	
             <div class="col-sm-2 btn-group btn-group-toggle" data-toggle="buttons">
@@ -77,25 +88,111 @@
         <div class="alert alert-danger eligibility-result ineligible">
           <h4 class="alert-heading">Sorry, you are not eligible.</h4>
           <p>Unfortunately, this property tax deferral program is not available to you.</p>
-          <p>TODO: tell these people where to go for other ideas?</p>
+          <p>You may be eligible for other programs.  See eligibility requirements
+		  for all programs <a href="https://www.somervillema.gov/departments/finance/assessing/statutory-exemptions">here</a>.</p>
         </div>
         <div class="alert alert-success eligibility-result eligible">
           <h4 class="alert-heading">Good news!  You may be eligible!</h4>
           You may indeed be eligible to take advantage of this deferral program.
+		  
+		  <div class="alert alert-warning eligibility-result mortgage">
+		     <h4 class="alert-heading">Note about your home's mortgage</h4>
+			 <p>Homes with a mortgage will require approval of their mortgage lender to finalize enrollment in the program. Some lenders, especially the larger national lenders, may not agree to approve liens.</p>
+		  </div>
+
           <hr>
           Next steps: 
           <ul>
             <li>Learn more this and other exemptions <a href="https://www.somervillema.gov/departments/finance/assessing/statutory-exemptions">here</a>. 
               The deadline for filing is Monday, April 2, 2018
             <li>Contact the Assessing Office at City Hall for more information: 617-625-6600 ext. 3100</li>
-            <li><a href="budget.html">Use a tool</a> to estimate how the program would affect your budget</li>
+            <li><a href="#budgetingTool">Use a tool</a> to estimate how the program would affect your budget</li>
           </ul>
+		  
+		  <hr>
+		  Program FAQs:
+		  <ul>
+		  <li><i>Can I participate if my home is in a trust?</i> Yes, however, the applicant needs to be a beneficiary and trustee of the trust.</li>
+          <li><i>Can other fees and taxes be deferred?</i> You may be eligible to defer CPA payments under a different program called Chapter 44B. Charges for the high school construction override will already be included in the deferment, and you will have an option to defer water and sewer charges as well. Contact the Assessing Office for more information.</li> 
+          <li><i>Is there a maximum amount I can defer?</i> You can defer taxes due the city up to 50% of the property value.</li>
+
+		  
+		  
         </div>
       </div>
       </div>
+	  <br>
+	  <hr>
+	  <br>
+	        <div class="container">
+        <h2 id="budgetingTool">Budgeting Tool</h2>
+        <p>Change the information below to create different scenarios of what your home will be worth in the future./p>
+        <form id="budget-form">
+          <div class="form-group row">
+            <label for="home-value" class="col-sm-4 col-form-label text-sm-right">Current value of home 
+			<span data-trigger="click hover focus" data-html="true" title="You can look up your home’s current assessed value &lt;a href=&quot;http://gis.vgsi.com/somervillema/&quot;&gt;here&lt;/a&gt;. The default value of $731,700 is the average assessed value for a two-family home in 2018.  Assessed values are generally lower than market values. According to &lt;a href=&quot;https://www.zillow.com/somerville-ma/home-values/&quot;&gt;Zillow&lt;/a&gt;, the median sales price of homes in Somerville is $704,950." data-toggle="tooltip" aria-label="info">&#x1f6c8;</span> 
+			:</label>	
+            <div class="col-sm-3 form-inline">
+              <div class="input-group">
+                <span class="col-form-label">$</span><input id="home-value" type="number" class="form-control" min="0" step="100" value="731700">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="appreciation-rate" class="col-sm-4 col-form-label text-sm-right">Annual home value appreciation rate
+			<span data-trigger="click hover focus" data-html="true" title="Between 2010 and 2016, properties appreciated by an annual increase of 10.4%; however, this rate will fluctuate with market factors, and may in some years involve a loss of value." data-toggle="tooltip" aria-label="info">&#x1f6c8;</span>
+			:</label>	
+            <div class="col-sm-3 form-inline">
+              <div class="input-group">
+                <input id="appreciation-rate" type="number" class="form-control" min="0" step="0.1" value="5"><span class="col-form-label">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="tax-rate" class="col-sm-4 col-form-label text-sm-right">Annual estimated tax rate
+			<span data-trigger="click hover focus" data-html="true" title="The default tax rate of 0.864% is calculated as follows. Our current residential tax rate is $11.31/$1,000 in assessed property value, or 1.131% of the property value. This is discounted for the residential exemption (1.131% × 65% = 0.735%). (See &lt;a href=&quot;https://www.somervillema.gov/sites/default/files/fy18-property-tax-update.pdf&quot;&gt;here&lt;/a&gt;.) Then, we added an estimate for water/sewer fees of 0.081% based on an average usage of 50 gallons/person/day in Somerville, which yields $564/year for one household, or 0.081% additional charge for the average Somerville household. (See &lt;a href=&quot;http://archive.boston.com/yourtown/specials/water/massachusetts_water_usage_map/&quot;&gt;here&lt;/a&gt;. ) Finally, we added the additional tax for the High School override, which are expected to reach maximums FY27-FY47 as follows: $189/year for condos, $294/year for single families, $349/year for two-families, and $428/year for three-families.  (See: &lt;a href=&quot;http://go.somervillema.gov/highschool/faq.html&quot;&gt;here&lt;/a&gt;). This rate does not include CPA, which is an additional 1.5% charge on net property taxes and which has a separate eligibility program (See &lt;a href=&quot;https://www.somervillema.gov/cpa/surcharge&quot;&gt;here&lt;/a&gt;.)" data-toggle="tooltip" aria-label="info">&#x1f6c8;</span>
+			:</label>	
+            <div class="col-sm-3 form-inline">
+              <div class="input-group">
+                <input id="tax-rate" type="number" class="form-control" min="0" step="0.001" value="0.864"><span class="col-form-label">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="interest-rate" class="col-sm-4 col-form-label text-sm-right">Annual loan interest rate
+			<span data-trigger="click hover focus" data-html="true" title="This fixed rate is set by law." data-toggle="tooltip" aria-label="info">&#x1f6c8;</span>
+			:</label>	
+            <div class="col-sm-3 form-inline">
+              <div class="input-group">
+                <input id="interest-rate" type="number" class="form-control" min="0" step="0.1" value="3"><span class="col-form-label">%</span>
+              </div>
+            </div>
+          </div>
+          <table id="budget-results" class="table text-right">
+            <thead>
+              <tr>
+                <th scope="col">Year</th>
+                <th scope="col">Home Value</th>
+                <th scope="col">Yearly taxes</th>
+                <th scope="col">Accrued taxes</th>
+                <th scope="col">Yearly interest</th>
+ 				<th scope="col">Accrued interest</th>
+                <th scope="col">Accrued taxes and interest</th>
+                <th scope="col">Payout if sold at year end</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </form>
+      </div>
+
     </main>
+	<br>
+	<hr>
+	<br>
     <footer class="container">
-      <p>&copy; SomervilleTogether 2018</p>
+      <p>&copy; SomervilleTogether 2018.  Prepared by Stephanie Hirsch, Alderman at Large, and Joe Calzaretta with information from the City Assessing Office.  Contact Stephanie at <a href="mailto:stephanie@stephaniehirsch.org">stephanie@stephaniehirsch.org</a></p>
     </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -106,7 +203,7 @@
       // return true, false, or undefined
       function isEligible() {
         var buttons = $('#eligibility-form .yesno');
-        if (buttons.find('input[type=radio][value=no]:checked').length !== 0)
+        if (buttons.find('input[name!=\'qM\'][type=radio][value=no]:checked').length !== 0)
           return false;
         if (buttons.length > buttons.find('input[type=radio]:checked').length)
           return void 0;
@@ -117,13 +214,81 @@
         var eligible = isEligible();
         $('.eligibility-result.unknown').toggle(typeof eligible == 'undefined');
         $('.eligibility-result.eligible').toggle(eligible == true);
+		$('.eligibility-result.mortgage').toggle($('input[name=\'qM\'][value=yes]:checked').length !== 0)
         if (eligible == true) {
           $('.eligibility-result.eligible').focus();
         }
         $('.eligibility-result.ineligible').toggle(eligible == false);
       }
       showEligible();
-      $('#eligibility-form input').change(showEligible);    </script>
+      $('#eligibility-form input').change(showEligible);    
+	  
+	  	$(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+     })
+      function drawTable() {
+        var initialHomeValue = +($('#home-value').val().replace(/, /g,''));
+        var annualAppreciationRate = (+($('#appreciation-rate').val().replace(/, /g,''))) / 100;
+        var annualTaxRate = (+($('#tax-rate').val().replace(/, /g,''))) / 100;
+        var annualInterestRate = (+($('#interest-rate').val().replace(/, /g,''))) / 100;
+        var budget = calculateBudget(initialHomeValue, annualAppreciationRate, annualTaxRate, annualInterestRate);
+        var bodyDiv = $('#budget-results tbody');
+        bodyDiv.empty();
+        var c = {
+          style: 'currency',
+          currency: 'USD',
+          useGrouping: true,
+          maximumFractionDigits: 0,
+          minimumFractionDigits: 0
+        };
+        for (var i = 0; i < budget.length; i++) {
+          var budgetYear = budget[i];
+          var row = $('<tr>');
+          row.append($('<th scope="row">').text(budgetYear.year+2018));
+          row.append($('<td>').text(budgetYear.homeValue.toLocaleString('en-us', c)));
+          row.append($('<td>').text(budgetYear.taxesDeferred.toLocaleString('en-us', c)));
+          row.append($('<td>').text(budgetYear.accruedTaxes.toLocaleString('en-us', c)));
+          row.append($('<td>').text(budgetYear.interest.toLocaleString('en-us', c)));
+          row.append($('<td>').text(budgetYear.accruedInterest.toLocaleString('en-us', c)));
+          row.append($('<td>').text(budgetYear.accruedTaxesAndInterest.toLocaleString('en-us', c)));
+          row.append($('<td>').text(budgetYear.payoutIfSold.toLocaleString('en-us', c)));
+          bodyDiv.append(row);
+        }
+      }
+      drawTable();
+      $('#budget-form input').change(drawTable);
+
+      function calculateBudget(initialHomeValue, annualAppreciationRate, annualTaxRate, annualInterestRate) {
+        var homeValue = initialHomeValue;
+        var accruedTaxes = 0;
+        var accruedInterest = 0;
+        var accruedTaxesAndInterest = 0;
+        var ret = [];
+        for (var year = 0; year < 20; year++) {
+          
+		  var taxesDeferred = homeValue * annualTaxRate;
+          accruedTaxes += taxesDeferred;
+          accruedTaxesAndInterest += taxesDeferred;
+		  
+		  var interest = accruedTaxesAndInterest * annualInterestRate;
+          accruedInterest += interest;
+          accruedTaxesAndInterest += interest;
+		  
+          ret.push({
+            year: year,
+            homeValue: homeValue,
+            taxesDeferred: taxesDeferred,
+            interest: interest,
+            accruedTaxes: accruedTaxes,
+            accruedInterest: accruedInterest,
+            accruedTaxesAndInterest: accruedTaxesAndInterest,
+            payoutIfSold: homeValue - accruedTaxesAndInterest
+          })
+          homeValue += homeValue * annualAppreciationRate;
+        }
+        return ret;
+      }
+
+	  </script>
   </body>
 </html>
-
